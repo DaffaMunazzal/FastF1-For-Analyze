@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Data Analytics</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<body>
+
+    <header class="dashboard-header">
+        <h1>Formula 1 Driver Database</h1>
+        <p>Dashboard Analisis Data F1 (Live from Local API)</p>
+    </header>
+
+    <main id="driver-board" class="driver-grid">
+        </main>
+        
+    <section class="chart-section">
+     <h2>Pace Comparison (Top 3 Finishers)</h2>
+     <figure class="chart-container">
+         <canvas id="lapChart"></canvas>
+         <figcaption>Grafik fluktuasi waktu putaran (dalam detik) pada GP Bahrain 2024.</figcaption>
+     </figure>
+     
+ </section>
+    <script>
+        
+        // JAVASCRIPT UNTUK GRAFIK LAP TIMES
+     const chartUrl = 'http://127.0.0.1:5000/api/laptimes';
+     const ctx = document.getElementById('lapChart').getContext('2d');
+
+     fetch(chartUrl)
+         .then(response => response.json())
+         .then(data => {
+             if(data.status === 'success') {
+                 new Chart(ctx, {
+                     type: 'line',
+                     data: {
+                         labels: data.laps, // Sumbu X (Lap 1, 2, 3...)
+                         datasets: data.datasets // Garis pembalap dan warnanya
+                     },
+                     options: {
+                         responsive: true,
+                         plugins: {
+                             legend: { labels: { color: '#ffffff' } }
+                         },
+                         scales: {
+                             y: {
+                                 title: { display: true, text: 'Lap Time (Detik)', color: '#a0a0b5' },
+                                 ticks: { color: '#a0a0b5' }
+                             },
+                             x: {
+                                 title: { display: true, text: 'Lap Number', color: '#a0a0b5' },
+                                 ticks: { color: '#a0a0b5' }
+                             }
+                         }
+                     }
+                 });
+             }
+         })
+         .catch(error => console.error('Error memuat grafik:', error));
+
+        const apiUrl = 'http://127.0.0.1:5000/api/drivers';
+        const driverBoard = document.getElementById('driver-board');
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                data.data.forEach(driver => {
+                    
+                    const card = document.createElement('article');
+                    // Menambahkan nama class agar desain dari style.css bisa masuk
+                    card.className = 'driver-card'; 
+                    card.style.borderLeftColor = `#${driver.team_color}`;
+                    
+                    card.innerHTML = `
+                        <h2 class="driver-name">
+                            ${driver.driver_code} 
+                            <span class="driver-number">#${driver.driver_number}</span>
+                        </h2>
+                        <p class="team-name">${driver.team_name}</p>
+                    `;
+                    
+                    driverBoard.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                driverBoard.innerHTML = '<p>Gagal memuat data dari API. Pastikan server Flask menyala.</p>';
+            });
+    </script>
+    
+
+
+</body>
+</html>
