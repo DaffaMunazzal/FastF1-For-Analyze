@@ -38,42 +38,42 @@ The project is currently transitioning towards a Multi-Page Application (MPA) ar
 Built as a practical exploration of Information Systems architecture and Data Analytics.
 
 
-### HOW TO INSTAL LIBRARY
+### HOW TO INSTAL LIBRARY  
  ```
 ⚙️ Local Setup & Installation
 
 Ensure you have **Python 3.8+** and **MySQL/MariaDB** installed on your machine before running this project.
-```
+```  
 1. **Clone the repository:**  
-   ```bash
+   ```bash  
    git clone [https://github.com/your-username/f1-dashboard.git](https://github.com/your-username/f1-dashboard.git)
    cd f1-dashboard
 
 2. Create a Virtual Environment (Recommended):  
    This ensures project dependencies remain isolated from your global Python environment.
-   python -m venv venv
+   python -m venv venv  
 
 # For Windows users:  
- ```bash
+ ```bash  
  venv\Scripts\activate
  ```
 # For Mac/Linux users:  
- ```bash
+ ```bash  
  source venv/bin/activate
  ```
 3. Install the required Python libraries:  
-   Run the following command to install all necessary backend and ETL dependencies:
-   ```bash
+   Run the following command to install all necessary backend and ETL dependencies:  
+   ```bash  
    pip install fastf1 pandas sqlalchemy pymysql flask flask-cors
-   ```
+   ```  
 4. MySQL/MariaDB Database Setup:  
- [] Create a new database named f1_analysis in your local SQL server.
- [] Open etl_telemetry.py and opp.py, and ensure the create_engine connection string matches your local database credentials (e.g., mysql+pymysql://root:password@localhost/f1_analysis).
-
+ [] Create a new database named f1_analysis in your local SQL server.  
+ [] Open etl_telemetry.py and opp.py, and ensure the create_engine connection string matches your local database credentials (e.g., mysql+pymysql://root:password@localhost/f1_analysis).  
+  
 5. Run the Application:  
- [] Since the frontend utilizes Chart.js via CDN, no npm or Node.js installation is required.
- [] Simply start the Flask API server by running the following command in your terminal:
- ```bash
+ [] Since the frontend utilizes Chart.js via CDN, no npm or Node.js installation is required.  
+ [] Simply start the Flask API server by running the following command in your terminal:  
+ ```bash  
  python opp.py
- ```
- [] Open index.html using the Live Server extension in VS Code, and your dashboard is ready to use!
+ ```  
+ [] Open index.html using the Live Server extension in VS Code, and your dashboard is ready to use!  
