@@ -11,7 +11,7 @@
 
     <header class="dashboard-header">
         <h1>Formula 1 Driver Database</h1>
-        <p>Dashboard Analisis Data F1 (Live from Local API)</p>
+        <p>Dashboard Analytics Formula 1 Data (Live from Local API)</p>
     </header>
 
     <main id="driver-board" class="driver-grid">
@@ -92,7 +92,107 @@
             });
     </script>
     
+    <section class="telemetry-section">
+        <h2>Telemetry Data (GP Bahrain 2024)</h2>
+        <figure class="chart-container">
+            <canvas id="telemetryChart"></canvas>
+            <figcaption>Grafik lap tercepat Lewis Hamilton GP Bahrain 2024</figcaption>
+        </figure>
+    </section>
+    <script>
+    // 1. Tentukan URL API dan ambil kanvasnya
+    const telemetryUrl = 'http://127.0.0.1:5000/api/telemetry';
+    const telemetryCtx = document.getElementById('telemetryChart').getContext('2d');
 
+    // 2. Telepon API Flask pakai fetch()
+    fetch(telemetryUrl)
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                
+                // 3. Pisahkan data seperti yang sudah kamu buat
+                const distances = data.data.map(item => Math.round(item.Distance));
+                const speeds = data.data.map(item => item.Speed);
+                const throttles = data.data.map(item => item.Throttle);
+                const RPM = data.data.map(item => item.RPM);
+                const brake = data.data.map(item => item.Brake);
+                
+                // PENTING: Gunakan backtick (`) dan pastikan nama kolom persis dari database
+                const teamColor = `#${data.data[0].team_color}`;
+
+                // 4. Masukkan semuanya ke dalam cetakan Chart.js
+                new Chart(telemetryCtx, {
+                    type: 'line',
+                    data: {
+                        labels: distances,
+                        datasets: [
+                            {
+                                label: 'Speed (km/h)',
+                                data: speeds,
+                                borderColor: teamColor,
+                                yAxisID: 'y', // Nyambung ke sumbu Y kiri
+                                pointRadius: 0, // Matikan titik agar tidak ngelag
+                                borderWidth: 2
+                            },
+                            {
+                                label: 'Throttle (%)',
+                                data: throttles,
+                                borderColor: '#00ff00',
+                                yAxisID: 'y1', // Nyambung ke sumbu Y kanan
+                                pointRadius: 0,
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'RPM',
+                                data: RPM,
+                                borderColor: '#ff0000',
+                                yAxisID: 'y2',
+                                pointRadius: 0,
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Brake (%)',
+                                data: brake,
+                                borderColor: '#0000ff',
+                                yAxisID: 'y3',
+                                pointRadius: 0,
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: { // 5. scales harus dibungkus oleh options!
+                        responsive: true,
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: { display: true, text: 'Speed (km/h)', color: '#ffffff' },
+                                ticks: { color: '#a0a0b5' }
+                            }, // Jangan lupa koma di sini!
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                min: 0,
+                                max: 100,
+                                title: { display: true, text: 'Throttle (%)', color: '#00ff00' },
+                                ticks: { color: '#00ff00' },
+                                grid: { drawOnChartArea: false }
+                            }, // Jangan lupa koma di sini!
+                            x: {
+                                title: { display: true, text: 'Distance (m)', color: '#ffffff' },
+                                ticks: { color: '#a0a0b5' },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+        })
+        .catch(error => console.error('Error memuat telemetry:', error));
+</script>
+        
 
 </body>
 </html>

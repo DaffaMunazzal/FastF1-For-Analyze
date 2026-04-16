@@ -55,7 +55,7 @@ def get_laptimes():
         # Menyusun data sesuai format yang diminta oleh Chart.js
         chart_data = []
         # Kita filter 3 pembalap top saja agar grafiknya tidak terlalu ruwet saat pertama dibuka
-        top_drivers = ['VER', 'PER', 'SAI'] 
+        top_drivers = ['VER', 'HAM', 'LEC']
         
         for driver in top_drivers:
             driver_data = df[df['driver_code'] == driver]
@@ -73,6 +73,22 @@ def get_laptimes():
             "laps": list(range(1, 58)), # Label sumbu X (Lap 1-57)
             "datasets": chart_data
         })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
+
+@app.route('/api/telemetry', methods=['GET'])
+def get_telemetry():
+    try:
+        query = """
+        SELECT t.*, d.team_color
+        FROM telemetry t
+        JOIN drivers d ON t.driver = d.driver_code
+        WHERE t.driver = 'HAM'
+        ORDER BY t.Time
+        """
+        df = pd.read_sql(query, con=engine)
+        data = df.to_dict(orient='records')
+        return jsonify({"status": "success", "data": data})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 

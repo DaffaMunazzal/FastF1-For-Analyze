@@ -95,3 +95,11 @@ figcaption {
     font-size: 0.9rem;
     font-style: italic;
 }
+
+.telemetry-section {
+    margin-top: 40px;
+    background-color: #1f1f2d;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
