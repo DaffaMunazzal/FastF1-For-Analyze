@@ -54,20 +54,23 @@ Ensure you have **Python 3.8+** and **MySQL/MariaDB** installed on your machine 
    python -m venv venv
 
 # For Windows users:
-venv\Scripts\activate
-
+ ```bash
+ venv\Scripts\activate
+ ```
 # For Mac/Linux users:
-source venv/bin/activate
-
+ ```bash
+ source venv/bin/activate
+ ```
 3. Install the required Python libraries:
    Run the following command to install all necessary backend and ETL dependencies:
+   ```bash
    pip install fastf1 pandas sqlalchemy pymysql flask flask-cors
-
-4. MySQL/MariaDB Database Setup:
+   ```
+5. MySQL/MariaDB Database Setup:
   [] Create a new database named f1_analysis in your local SQL server.
   [] Open etl_telemetry.py and opp.py, and ensure the create_engine connection string matches your local database credentials (e.g., mysql+pymysql://root:password@localhost/f1_analysis).
 
-5. Run the Application:
+6. Run the Application:
    [] Since the frontend utilizes Chart.js via CDN, no npm or Node.js installation is required.
    [] Simply start the Flask API server by running the following command in your terminal:
 
