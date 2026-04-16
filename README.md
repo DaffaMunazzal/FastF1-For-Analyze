@@ -1,4 +1,4 @@
-#🏎️ F1 Data Analytics Dashboard (Local API)#
+###🏎️ F1 Data Analytics Dashboard (Local API)
 Sebuah dashboard analitik Full-Stack yang dirancang untuk mengekstrak, memproses, dan memvisualisasikan data telemetri dan waktu putaran Formula 1 secara end-to-end. Proyek ini mendemonstrasikan implementasi pipeline data yang utuh, mulai dari sumber data mentah hingga visualisasi antarmuka web interaktif menggunakan Semantic HTML.
 
 ✨ Update Terbaru: Telemetry Integration
@@ -40,7 +40,7 @@ Dibangun sebagai eksplorasi arsitektur Sistem Informasi dan Analisis Data.
 Built as a practical exploration of Information Systems architecture and Data Analytics.
 
 
-#HOW TO INSTAL LIBRARY#
+###HOW TO INSTAL LIBRARY
  
  ⚙️ Local Setup & Installation
 
