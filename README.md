@@ -67,15 +67,13 @@ Ensure you have **Python 3.8+** and **MySQL/MariaDB** installed on your machine 
    pip install fastf1 pandas sqlalchemy pymysql flask flask-cors
    ```
 5. MySQL/MariaDB Database Setup:
-
-  [] Create a new database named f1_analysis in your local SQL server.
-  [] Open etl_telemetry.py and opp.py, and ensure the create_engine connection string matches your local database credentials (e.g., mysql+pymysql://root:password@localhost/f1_analysis).
+   [] Create a new database named f1_analysis in your local SQL server.
+   [] Open etl_telemetry.py and opp.py, and ensure the create_engine connection string matches your local database credentials (e.g., mysql+pymysql://root:password@localhost/f1_analysis).
 
 6. Run the Application:
-   
-   [] Since the frontend utilizes Chart.js via CDN, no npm or Node.js installation is required.
-   [] Simply start the Flask API server by running the following command in your terminal:
-
-python opp.py
-
-   [] Open index.html using the Live Server extension in VS Code, and your dashboard is ready to use!
+ [] Since the frontend utilizes Chart.js via CDN, no npm or Node.js installation is required.
+ [] Simply start the Flask API server by running the following command in your terminal:
+ ```bash
+ python opp.py
+ ```
+ [] Open index.html using the Live Server extension in VS Code, and your dashboard is ready to use!
