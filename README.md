@@ -1,4 +1,4 @@
-🏎️ F1 Data Analytics Dashboard (Local API)
+#🏎️ F1 Data Analytics Dashboard (Local API)
 Sebuah dashboard analitik Full-Stack yang dirancang untuk mengekstrak, memproses, dan memvisualisasikan data telemetri dan waktu putaran Formula 1 secara end-to-end. Proyek ini mendemonstrasikan implementasi pipeline data yang utuh, mulai dari sumber data mentah hingga visualisasi antarmuka web interaktif menggunakan Semantic HTML.
 
 ✨ Update Terbaru: Telemetry Integration
@@ -38,3 +38,41 @@ Proyek ini sedang dalam tahap transisi menuju arsitektur Multi-Page Application 
 Dibangun sebagai eksplorasi arsitektur Sistem Informasi dan Analisis Data.
 
 Built as a practical exploration of Information Systems architecture and Data Analytics.
+
+
+#HOW TO INSTAL LIBRARY
+ 
+ ⚙️ Local Setup & Installation
+
+Ensure you have **Python 3.8+** and **MySQL/MariaDB** installed on your machine before running this project.
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/f1-dashboard.git](https://github.com/your-username/f1-dashboard.git)
+   cd f1-dashboard
+
+2. Create a Virtual Environment (Recommended):
+   This ensures project dependencies remain isolated from your global Python environment.
+   python -m venv venv
+
+# For Windows users:
+venv\Scripts\activate
+
+# For Mac/Linux users:
+source venv/bin/activate
+
+3. Install the required Python libraries:
+   Run the following command to install all necessary backend and ETL dependencies:
+   pip install fastf1 pandas sqlalchemy pymysql flask flask-cors
+
+4. MySQL/MariaDB Database Setup:
+  [] Create a new database named f1_analysis in your local SQL server.
+  [] Open etl_telemetry.py and opp.py, and ensure the create_engine connection string matches your local database credentials (e.g., mysql+pymysql://root:password@localhost/f1_analysis).
+
+5. Run the Application:
+   [] Since the frontend utilizes Chart.js via CDN, no npm or Node.js installation is required.
+   [] Simply start the Flask API server by running the following command in your terminal:
+
+python opp.py
+
+   [] Open index.html using the Live Server extension in VS Code, and your dashboard is ready to use!
