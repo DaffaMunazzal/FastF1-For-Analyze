@@ -41,6 +41,7 @@ Proyek ini sedang dalam tahap transisi menuju arsitektur Multi-Page Application 
 Dibangun sebagai eksplorasi arsitektur Sistem Informasi dan Analisis Data.
 
 
+
 **ENGLISH :**
 
 
